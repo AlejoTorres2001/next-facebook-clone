@@ -48,14 +48,14 @@ const Header = () => {
       <div className="flex items-center sm:space-x-2 justify-end">
         <Image
           onClick={signOut}
-          className="rounded-full cursor-pointer"
+          className="visible rounded-full cursor-pointer"
           src={session.data.user.image}
           width={40}
           height={40}
           layout="fixed"
         alt="profile"
         ></Image>
-        <p className="whitespace-nowrap font-semibold pr-2 pl-3 ">Alejo Torres</p>
+        <p className="hidden md:block whitespace-nowrap font-semibold pr-2 pl-3 ">{session.data.user.name}</p>
         <ViewGridIcon className="icon"></ViewGridIcon>
         <ChatIcon className="icon"></ChatIcon>
         <BellIcon className="icon"></BellIcon>
