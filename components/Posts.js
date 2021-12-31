@@ -9,12 +9,13 @@ const Posts = () => {
     collection(db, "posts"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
+      orderBy: ["timestamp", "desc"],
     }
   );
 
   return (
     <div>
-      <p>
+      <p className="scrollbar-hide">
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <span>Collection: Loading...</span>}
         {realTimePost &&
