@@ -46,21 +46,6 @@ const InputBox = () => {
                         updateDoc(docRef, { post_img: url });
                      });
         }).catch((error) => {console.log(error)});
-        // uploadTask.on(
-        //   "state_changed",
-        //   (snapshot) => {
-        //     const progress =
-        //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        //   },
-        //   (error) => console.error(error),
-        //   () => {
-        //     //when uploads complete
-        //     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-        //         console.log(url)
-        //       updateDoc(docRef, { post_img: url });
-        //     });
-        //   }
-        // );
         removeImage();
       }
     });
