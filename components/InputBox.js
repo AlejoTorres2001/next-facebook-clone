@@ -24,7 +24,6 @@ const InputBox = () => {
   const session = useSession();
   const inputRef = useRef(null);
   const filePickerRef = useRef(null);
-
   const [imageToPost, setImageToPost] = useState(null);
   const sendPost = async (e) => {
     e.preventDefault();
@@ -39,21 +38,29 @@ const InputBox = () => {
     }).then((docRef) => {
       if (imageToPost) {
         const storageRef = ref(Storage, `images/${docRef.id}`);
-        const uploadTask = uploadBytesResumable(storageRef, imageToPost);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          },
-          (error) => console.error(error),
-          () => {
-            //when uploads complete
-            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-              updateDoc(docRef, { post_img: url });
-            });
-          }
-        );
+        const uploadTask =uploadString(storageRef, imageToPost,"data_url");
+        uploadTask.then((snapshot) => {
+
+            getDownloadURL(snapshot.ref).then((url) => {
+                        console.log(url)
+                        updateDoc(docRef, { post_img: url });
+                     });
+        }).catch((error) => {console.log(error)});
+        // uploadTask.on(
+        //   "state_changed",
+        //   (snapshot) => {
+        //     const progress =
+        //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        //   },
+        //   (error) => console.error(error),
+        //   () => {
+        //     //when uploads complete
+        //     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+        //         console.log(url)
+        //       updateDoc(docRef, { post_img: url });
+        //     });
+        //   }
+        // );
         removeImage();
       }
     });
