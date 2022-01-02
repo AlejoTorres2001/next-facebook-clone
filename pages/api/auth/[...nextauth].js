@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+import NextAuth from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
 
 export default NextAuth({
@@ -11,4 +11,4 @@ export default NextAuth({
     }),
     // ...add more providers here
   ],
-})
+});

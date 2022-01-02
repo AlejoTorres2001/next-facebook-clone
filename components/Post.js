@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import {ChatAltIcon,ShareIcon,ThumbUpIcon} from "@heroicons/react/outline";
+import { ChatAltIcon, ShareIcon, ThumbUpIcon } from "@heroicons/react/outline";
 const Post = ({ name, message, image, postImg, email, timestamp }) => {
   return (
     <div className="flex flex-col">
@@ -15,9 +15,13 @@ const Post = ({ name, message, image, postImg, email, timestamp }) => {
           />
           <div>
             <p className="font-medium">{name}</p>
-            <p className="text-xs text-gray-400">
-              {new Date(timestamp?.toDate()).toLocaleString()}
-            </p>
+            {timestamp ? (
+              <p className="text-xs text-gray-400">
+                {new Date(timestamp?.toDate()).toLocaleString()}
+              </p>
+            ) : (
+              <p className="text-xs text-gray-400">loading...</p>
+            )}
           </div>
         </div>
         <p className="pt-4 ">{message}</p>
@@ -29,22 +33,20 @@ const Post = ({ name, message, image, postImg, email, timestamp }) => {
       )}
       {/* Footer */}
       <div className="flex justify-between items-center rouded-b-2xl bg-white shadow-md text-gray-400 border-t rounded-bl-2xl rounded-br-2xl">
-          <div className="input-icon rounded-none rounded-bl-2xl">
-              <ThumbUpIcon className="h-4"></ThumbUpIcon>
-              <p className="text-xs sm:text-base">Comment</p>
-          </div>
+        <div className="input-icon rounded-none rounded-bl-2xl">
+          <ThumbUpIcon className="h-4"></ThumbUpIcon>
+          <p className="text-xs sm:text-base">Comment</p>
+        </div>
 
-          <div className="input-icon rounded-none ">
-              <ShareIcon className="h-4"></ShareIcon>
-              <p className="text-xs sm:text-base">Share</p>
+        <div className="input-icon rounded-none ">
+          <ShareIcon className="h-4"></ShareIcon>
+          <p className="text-xs sm:text-base">Share</p>
+        </div>
 
-          </div>
-
-          <div className="input-icon rounded-none rounded-br-2xl ">
-              <ChatAltIcon className="h-4"></ChatAltIcon>
-              <p className="text-xs sm:text-base">Share</p>
-
-          </div>
+        <div className="input-icon rounded-none rounded-br-2xl ">
+          <ChatAltIcon className="h-4"></ChatAltIcon>
+          <p className="text-xs sm:text-base">Share</p>
+        </div>
       </div>
     </div>
   );

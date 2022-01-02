@@ -38,14 +38,17 @@ const InputBox = () => {
     }).then((docRef) => {
       if (imageToPost) {
         const storageRef = ref(Storage, `images/${docRef.id}`);
-        const uploadTask =uploadString(storageRef, imageToPost,"data_url");
-        uploadTask.then((snapshot) => {
-
+        const uploadTask = uploadString(storageRef, imageToPost, "data_url");
+        uploadTask
+          .then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
-                        console.log(url)
-                        updateDoc(docRef, { post_img: url });
-                     });
-        }).catch((error) => {console.log(error)});
+              console.log(url);
+              updateDoc(docRef, { post_img: url });
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         removeImage();
       }
     });
